@@ -7,11 +7,11 @@ public class user {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Name;
-    private int Age;
-    private String Email;
-    private String Address;
-    private String Password;
+    private String name;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+    private String address;
+    private String password;
 
     public user() {
 
@@ -25,53 +25,54 @@ public class user {
         this.id = id;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-    public void setPassword(String password) {
-        this.Password = Password;
-    }
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-
-    public int getAge() {
-        return Age;
-    }
-
-    public void setAge(int age) {
-        Age = age;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.Email = Email;
+        this.email = email;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public user(long id,String Name, int Age, String Email, String Address, String Password) {
-        this.id = id;
-        this.Name = Name;
-        this.Age = Age;
-        this.Email = Email;
-        this.Address = Address;
-        this.Password = Password;
+    public user(String name, String email, String address, String password) {
+
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "user{" +
+                "id=" + id +
+                ", Name='" + name + '\'' +
+                ", Email='" + email + '\'' +
+                ", Address='" + address + '\'' +
+                ", Password='" + password + '\'' +
+                '}';
     }
 }
