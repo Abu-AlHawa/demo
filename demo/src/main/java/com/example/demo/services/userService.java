@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -13,10 +14,7 @@ public class userService {
     @Autowired
     private userRepository repository;
 
-    public user addUser(user u)
-    {
-        return repository.save(u);
-    }
+    public user addUser(user u) { return repository.save(u); }
 
 
 //    public user findByName(String name)
@@ -24,9 +22,9 @@ public class userService {
 //        return this.userRepository.findUserByName(name);
 //    }
 
-    public ArrayList<user> getAll()
+    public ArrayList<user> getAll(Long id)
     {
-        return (ArrayList<user>) repository.findAll();
+        return (ArrayList<user>) repository.findAllById(Collections.singleton(id));
     }
     public Optional<user> findUserById(Long id)
     {
@@ -34,8 +32,7 @@ public class userService {
     }
 
 public user login(String email, String password) {
-
-                                      System.out.println("Email: "+email+" Password: "+password);
+        System.out.println("Email: "+email+" Password: "+password);
 
         ArrayList<user> myList = (ArrayList<user>) repository.findAll();
     System.out.println(myList.size());
@@ -50,7 +47,6 @@ public user login(String email, String password) {
         }
         System.out.println(myList.get(0).getPassword());
         return new user();
-
     }
 
 

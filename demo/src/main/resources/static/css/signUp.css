@@ -72,6 +72,32 @@ form .form-group span.details {
   transition: all 0.3s ease;
 }
 
+.form-group .password-input {
+    position: relative;
+}
+
+.form-group .password-input input {
+    padding-right: 40px; /* Adjust this value to ensure the image doesn't overlap with the text */
+}
+
+.form-group .password-input {
+    position: relative;
+}
+
+.form-group .password-input input {
+    padding-right: 40px; /* Adjust this value to ensure the image doesn't overlap with the text */
+}
+
+.form-group .password-input .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Adjust the position of the image */
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 25px;
+}
+
+
 .user-details .form-group input:focus,
 .user-details .form-group input:valid {
   border-color: #9b59b6;

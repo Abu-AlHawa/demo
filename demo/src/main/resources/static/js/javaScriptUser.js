@@ -106,15 +106,15 @@ function getAll() {
           url: "/user/getAll/" + localStorage.getItem("id"),
           success: function (user) {
               // Update input fields with user data
-               document.getElementById("name").value = user.name;
-              document.getElementById("address").value = user.address;
+               document.getElementById("address").value = user.address;
               document.getElementById("email").value = user.email;
+              document.getElementById("name").value = user.name;
               document.getElementById("password").value = user.password;
 
               // Store user data in localStorage
-               localStorage.setItem("name",user.name);
-              localStorage.setItem("address", user.address);
+               localStorage.setItem("address",user.address);
               localStorage.setItem("email", user.email);
+              localStorage.setItem("name", user.name);
               localStorage.setItem("password", user.password);
           },
           error: function (error) {
@@ -140,6 +140,8 @@ function getAll() {
         data: JSON.stringify(user),
         success: function () {
         alert("user saved successfully!");
+             window.location.href="/main.html"
+
     //    window.onload = function() {
     //            var signupForm = document.getElementById('signup-form');
     //            signupForm.addEventListener('submit', function(event) {
@@ -201,7 +203,7 @@ $("#login-form").submit(function (event) {
   else {
   localStorage.setItem("id", user.id);
         alert("You have Login successfully!");
-     window.location.href="/index.html"
+     window.location.href="/main.html"
   }
 
 },
@@ -249,7 +251,7 @@ function save_data(){
         url: "/user/findUserId/"+id,
         success: function (user) {
             alert("find user successfully id="+user.id);
-            window.location.href = "/signUp.html?id="+user.id;//+ encodeURIComponent(user.id);
+            window.location.href = "/main.html?id="+user.id;//+ encodeURIComponent(user.id);
 
         },
         error: function (error) {

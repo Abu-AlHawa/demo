@@ -17,15 +17,16 @@ public class userControl {
 
     @PostMapping("/user/addUser")
     public @ResponseBody user addUser(@RequestBody user u) {
-        System.out.println(u);
+
+//        System.out.println(u);
 
         return this.userService.addUser(u);
 
     }
 
-    @GetMapping("/user/getAll")
-    public @ResponseBody ArrayList<user> getAll() {
-        return userService.getAll();
+    @GetMapping("/user/getAll/{id}")
+    public @ResponseBody ArrayList<user> getAll(@PathVariable("id") Long id) {
+        return userService.getAll(id);
     }
 
     @GetMapping("/user/findUserId/{id}")
