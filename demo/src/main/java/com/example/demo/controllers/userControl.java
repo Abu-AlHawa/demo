@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.services.userService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
@@ -51,24 +53,39 @@ public class userControl {
     }
 
 
-
     @PutMapping("/update/{id}")
     public user updateUser(@PathVariable("id") Long id, @RequestBody user updatedUser) {
-        System.out.println("i am an udated user control="+ updatedUser.getName()+updatedUser.getEmail());
+        System.out.println("i am an udated user control=" + updatedUser.getName() + updatedUser.getEmail());
 
-        return  userService.updateUser(id, updatedUser);
+        return userService.updateUser(id, updatedUser);
     }
+
 
 /*
     @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        try {
+            userService.deleteUserById(id);
+            return ResponseEntity.ok().body("User deleted successfully.");
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete user.");
+        }
+    }
+
+ */
+
+    @DeleteMapping("/user/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         Optional<user> userOptional = userService.findUserById(id);
         if (userOptional.isPresent()) {
             userService.deleteUserById(id);
             return ResponseEntity.ok().body("تم حذف المستخدم بنجاح.");
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
 
- */
 
 }

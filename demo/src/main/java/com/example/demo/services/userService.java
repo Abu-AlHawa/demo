@@ -62,6 +62,31 @@ public user login(String email, String password) {
        existinguser.setPassword(updateduser.getPassword());
        return repository.save(existinguser);
     }
-    
+
+/*
+    public void deleteUserById(Long id) throws UserNotFoundException {
+        Optional<user> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            throw new UserNotFoundException("User with id " + id + " not found");
+        }
+    }
+
+ */
+
+
+
+    public void deleteUserById(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            // Log the error or handle it appropriately
+            throw new RuntimeException("Failed to delete user with id: " + id, e);
+        }
+    }
+
 
 }
+
+
