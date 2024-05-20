@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<!--================ PRELOADER ================-->
+<div class="preloader-cover">
+  <div class="preloader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<!--============== PRELOADER END ==============-->
+
+<div class="background">
+  <section class="page-section" id="login">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase">Log In</h2>
+      </div>
+      <div class="col-lg-8 mx-auto">
+        <form id="login-form">
+          <div class="form-group content">
+            <label for="Email">Email:</label>
+            <input type="text" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="password-input">
+              <input type="password" class="form-control" id="password" name="password" required>
+              <img src="assets/img/eyeIcon/eye-close.png" alt="Toggle Password" class="eye-icon" id="eyeIcon">
+            </div>
+            <div class="form-group button">
+              <button type="submit">Submit</button>
+            </div>
+            <div class="form-group login">
+              <a class="nav-link" href="index.html">Don't have an account? Signup</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+$(window).on('load', function() {
+    /*--------------------- PRELOADER --------------------*/
+    $('body').addClass('animated-page page-loaded');
+});
+
+let eyeIcon = document.getElementById("eyeIcon");
+let password = document.getElementById("password");
+
+eyeIcon.onclick = function() {
+    if (password.type == "password") {
+        password.type = "text";
+        eyeIcon.src = "assets/img/eyeIcon/eye-open.png";
+    } else {
+        password.type = "password";
+        eyeIcon.src = "assets/img/eyeIcon/eye-close.png";
+    }
+}
+
+$("#login-form").submit(function(event) {
+    event.preventDefault();
+
+    email = $("#email").val();
+    password = $("#password").val();
+
+    $.ajax({
+        type: "GET",
+        url: "/users/login/" + email + "/" + password,
+        contentType: "application/json",
+        success: function(user) {
+            if (user.id == 0) {
+                alert("Wrong Email Or Password");
+            } else {
+                localStorage.setItem("id", user.id);
+                alert("You have Login successfully!");
+                window.location.href = "/homePage.html";
+            }
+        },
+        error: function(error) {
+            alert("Wrong Email Or Password", error);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

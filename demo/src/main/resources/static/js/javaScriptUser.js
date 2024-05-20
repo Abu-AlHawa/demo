@@ -140,7 +140,7 @@ function getAll() {
         data: JSON.stringify(user),
         success: function () {
         alert("user saved successfully!");
-             window.location.href="/main.html"
+             window.location.href="/homePage.html"
 
     //    window.onload = function() {
     //            var signupForm = document.getElementById('signup-form');
@@ -203,7 +203,7 @@ $("#login-form").submit(function (event) {
   else {
   localStorage.setItem("id", user.id);
         alert("You have Login successfully!");
-     window.location.href="/main.html"
+window.location.href = "/homePage.html";
   }
 
 },
@@ -251,7 +251,7 @@ function save_data(){
         url: "/user/findUserId/"+id,
         success: function (user) {
             alert("find user successfully id="+user.id);
-            window.location.href = "/main.html?id="+user.id;//+ encodeURIComponent(user.id);
+            window.location.href = "/homePage.html?id="+user.id;//+ encodeURIComponent(user.id);
 
         },
         error: function (error) {

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <title>Peddle - Profile</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap-grid.css">
+  <link rel="stylesheet" href="css/homePage.css">
+  <style>
+    .profile-image {
+      max-width: 100%;
+      height: auto;
+    }
+    .outlined-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .profile-container {
+      display: flex;
+      align-items: center;
+    }
+    .profile-info {
+      flex-grow: 1;
+      margin-left: 20px;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .container {
+      margin-bottom: 20px; /* Adds space at the bottom */
+    }
+  </style>
+</head>
+
+<body id="home">
+<!--================ PRELOADER ================-->
+<div class="preloader-cover">
+  <div class="preloader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<!--============== PRELOADER END ==============-->
+<!-- =================== HEADER =================== -->
+<header class="header">
+  <a href="#" class="nav-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+  <div class="header-menu">
+    <div class="container">
+      <a href="index.html" class="logo"><img src="assets/img/img/logo.png" alt="logo"></a>
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="homePage.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="bikeShop.html">Shop</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+          <li class="active"><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- ================= HEADER END ================= -->
+<!-- ================ HEADER-TITLE ================ -->
+<section class="s-header-title">
+  <div class="container">
+    <h1>Profile</h1>
+    <ul class="breadcrambs">
+      <li><a href="homePage.html">Home</a></li>
+      <li>Profile</li>
+    </ul>
+  </div>
+</section>
+<!-- ============== HEADER-TITLE END ============== -->
+<!-- =================== MAIN BODY =================== -->
+<div class="container mt-5">
+  <div class="profile-container">
+    <div class="card outlined-card">
+      <div class="card-body text-center">
+        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle profile-image" width="150">
+        <h4 class="mt-3">Moe Doe</h4>
+
+      </div>
+    </div>
+    <div class="profile-info">
+      <form id="edit-form">
+        <div class="card outlined-card">
+          <div class="card-body">
+            <!-- User profile input form content -->
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <label class="labels" id="nameLabel">Name</label>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" placeholder="Name" id="name" value="Joe Loe" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <label class="labels">Address</label>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" placeholder="Enter Address" id="address" value="Bay Area, Jerusalem, Hilton" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <label class="labels">Email</label>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" placeholder="Enter Email" id="email" value="jo@gmail.com" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <label class="labels">Password</label>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" placeholder="Password" id="password" value="mlo4539" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <button class="btn btn-primary profile-button" type="submit" form="edit-form" style="color: black;"><span>Edit Profile</span></button>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-primary profile-button" onclick="delete_profile()" style="color: black;"><span>Delete User</span></button>
+    </div>
+    <div class="col-sm-3">
+      <a href="signUp.html" class="btn btn-primary profile-button" style="color: black;" target="_blank"><span>Add User</span></a>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-primary profile-button" onclick="save_data()" style="color: black;"><span>Save Profile</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SCRIPTS =================== -->
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+<script type='text/javascript' src='js/jquery-2.2.4.min.js'></script>
+<script src="js/scripts.js"></script>
+<script type='text/javascript'>
+    var myLink = document.querySelector('a[href="#"]');
+    myLink.addEventListener('click', function(e) {
+      e.preventDefault();
+    });
+
+    var id = localStorage.getItem("id");
+    function getAll() {
+      $.ajax({
+        type: "GET",
+        url: "/user/getAll/" + localStorage.getItem("id"),
+        success: function (user) {
+          document.getElementById("address").value = user[0].address;
+          document.getElementById("email").value = user[0].email;
+          document.getElementById("name").value = user[0].name;
+          document.getElementById("password").value = user[0].password;
+
+          localStorage.setItem("address", user.address);
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("name", user.name);
+          localStorage.setItem("password", user.password);
+        },
+        error: function (error) {
+          console.log("Error finding your account", error);
+        }
+      });
+    }
+    getAll();
+
+    $("#edit-form").submit(function (event) {
+      event.preventDefault();
+      $("#name").removeAttr('readonly');
+      $("#address").removeAttr('readonly');
+      $("#email").removeAttr('readonly');
+      $("#password").removeAttr('readonly');
+    });
+
+    function save_data(){
+      let user = {
+        address: $("#address").val(),
+        email: $("#email").val(),
+        name: $("#name").val(),
+        password: $("#password").val(),
+      };
+     // alert(JSON.stringify(user));
+      $.ajax({
+        type: "PUT",
+        url: "/update/" + localStorage.getItem("id"),
+        contentType: "application/json",
+        data: JSON.stringify(user),
+        success: function () {
+          alert("user saved successfully!");
+          window.location.href = "/homePage.html";
+        },
+      });
+    }
+
+    function delete_profile() {
+      const userId = localStorage.getItem("id");
+      fetch('/user/delete/' + userId, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to delete profile');
+        }
+        alert("Profile deleted successfully!");
+        window.location.href = "/homePage.html";
+      })
+      .catch(error => {
+        console.error('Error deleting profile:', error);
+        alert("Failed to delete profile: " + error.message);
+      });
+
+      document.getElementById("address").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("name").value = "";
+      document.getElementById("password").value = "";
+    }
+  </script>
+
+<!--==================== FOOTER ====================-->
+<footer>
+  <div class="container">
+    <div class="row footer-item-cover">
+      <div class="footer-subscribe col-md-7 col-lg-8">
+        <h6>subscribe</h6>
+        <p>Subscribe to us, you won't miss the new arrivals, as well as discounts and sales.</p>
+        <form class="subscribe-form">
+          <i class="fa fa-at" aria-hidden="true"></i>
+          <input class="inp-form" type="email" name="subscribe" placeholder="E-mail">
+          <button type="submit" class="btn btn-form"><span>send</span></button>
+        </form>
+      </div>
+      <div class="footer-item col-md-5 col-lg-4">
+        <h6>info</h6>
+        <ul class="footer-list">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row footer-item-cover">
+      <div class="footer-touch col-md-7 col-lg-8">
+        <h6>stay in touch</h6>
+        <ul class="footer-soc social-list">
+          <li><a target="_blank" href="https://www.instagram.com/rovadex"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+        </ul>
+        <div class="footer-autor">Questions? Please write us at: <a href="mailto:Peddle@gmail.com">Peddle@gmail.com</a></div>
+      </div>
+      <div class="footer-item col-md-5 col-lg-4">
+        <h6>Shop</h6>
+        <ul class="footer-list">
+          <li><a href="shop.html">Road Bike</a></li>
+          <li><a href="shop.html">BMX Bike</a></li>
+          <li><a href="shop.html">Mountain Bike</a></li>
+          <li><a href="shop.html">Kids Bike</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--================== FOOTER END ==================-->
+
+</body>
+</html>
