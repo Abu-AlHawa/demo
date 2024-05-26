@@ -361,6 +361,39 @@
 
 	}
 
+/* ----------------------- COUNTER ---------------------- */
+	if ( $('.counter-animate.counter-active')[0] ) {
+		$( window ).on( 'scroll', function(){
+			var winScrollTop = $( this ).scrollTop(),
+				windowHeight = $( this ).height();
+
+			$('.counter-animate.counter-active').each(function(){
+				var $this = $(this),
+				targetPos = $this.offset().top;
+				if( targetPos < winScrollTop + 100 + windowHeight / 2 ){
+					if( $this.hasClass( 'counter-active' )){
+						var time = 1;
+						$('.about-count-item .number span').each(function(){
+							var i = 1,
+							num = $(this).data('number'),
+							step = 5 * time / num,
+							that = $(this),
+							int = setInterval(function(){
+								if (i <= num) {
+									that.html(i);
+								}
+								else {
+									clearInterval(int);
+								}
+								i++;
+							},step);
+						});
+						$this.removeClass('counter-active');
+					}
+				}
+			});
+		});
+	}
 
 	/*--------------------- WIDGET RANGE ---------------------*/
 	if( $( '#slider-range' )[0] ){
